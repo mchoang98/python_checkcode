@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Python Code Tester</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/monaco-editor@latest/min/vs/loader.js"></script>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+    #editor {
+      height: 400px;
+      border-radius: 0.5rem;
+      overflow: hidden;
+    }
+    .monaco-editor {
+      border: 1px solid #4b5563; /* gray-600 */
+    }
+  </style>
+</head>
+<body class="bg-gray-900 text-gray-200 min-h-screen flex flex-col items-center px-4 py-6">
+
+  <h1 id="pageTitle" class="text-3xl font-bold mb-6">🧪 Python Code Tester (Pytest)</h1>
+
+  <div class="w-full max-w-5xl space-y-4">
+    <label id="funcLabel" class="block text-lg font-medium mb-1">Nhập hàm <code>...</code> vào đây:</label>
+    <p id="funcDescription" class="text-gray-400 mb-4 italic"></p>
+
+    <!-- Monaco Editor mount point -->
+    <div id="editor" class="rounded-md"></div>
+
+    <button id="runBtn" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md text-white font-semibold">
+      ▶️ Chạy Pytest
+    </button>
+
+    <div class="mt-6">
+      <h2 class="text-xl font-semibold mb-2">📄 Kết quả:</h2>
+      <pre id="output" class="bg-[#1e1e1e] text-green-300 p-4 rounded-md border border-gray-600 whitespace-pre-wrap overflow-x-auto"></pre>
+    </div>
+  </div>
+
+  <script>
+    let editor;
+
+    async function loadFunctionInfo() {
+      try {
+        const res = await fetch('/get_function_name');
+        if (!res.ok) throw new Error('Không tải được thông tin hàm');
+        const data = await res.json();
+        const funcName = data.function || 'chưa rõ';
+        const description = data.description || '';
+        document.getElementById('funcLabel').innerHTML = `Nhập hàm <code>${funcName}</code> vào đây:`;
+        document.getElementById('funcDescription').textContent = description;
+        document.getElementById('pageTitle').textContent = `🧪 Python Code Tester - Hàm: ${funcName}`;
+
+        // Set mặc định code mẫu trong editor
+        if (editor) {
+          editor.setValue(`def ${funcName}(...):\n    # Your code here...\n`);
+        }
+      } catch (e) {
+        console.warn('Lỗi load function info:', e);
+      }
+    }
+
+    require.config({ paths: { vs: 'https://cdn.jsdelivr.net/npm/monaco-editor@latest/min/vs' } });
+
+    require(["vs/editor/editor.main"], function () {
+      editor = monaco.editor.create(document.getElementById('editor'), {
+        value: '',
+        language: 'python',
+        theme: 'vs-dark',
+        fontSize: 16,
+        lineNumbers: 'on',
+        automaticLayout: true
+      });
+      loadFunctionInfo();
+    });
+
+    document.getElementById("runBtn").addEventListener("click", async () => {
+      const code = editor.getValue();
+      const outputEl = document.getElementById("output");
+
+      if (!code.trim()) {
+        outputEl.textContent = '⚠️ Vui lòng nhập code.';
+        return;
+      }
+
+      outputEl.textContent = '⏳ Đang chạy...';
+
+      try {
+        const response = await fetch('/run_pytest', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ code })
+        });
+
+        if (!response.ok) {
+          throw new Error('Server trả lỗi: ' + response.statusText);
+        }
+
+        const data = await response.json();
+
+        if (data.error) {
+          outputEl.textContent = '❌ Lỗi: ' + data.error;
+        } else {
+          outputEl.textContent =
+            `🔁 Return code: ${data.returncode}\n\n📤 STDOUT:\n${data.stdout}\n\n📥 STDERR:\n${data.stderr}`;
+        }
+      } catch (err) {
+        outputEl.textContent = '🚫 Lỗi khi gọi server: ' + err.message;
+      }
+    });
+  </script>
+</body>
+</html>

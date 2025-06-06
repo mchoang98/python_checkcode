@@ -1,0 +1,19 @@
+{
+  "function": "tinh_tien_san_pham",
+  "params": ["so_vo", "tu_dien", "sach_giao_khoa"],
+  "description": "Tính tổng tiền sản phẩm khách mua dựa trên số lượng.",
+  "problem": {
+    "title": "Bài 5: Tính tiền sản phẩm trong cửa hàng (phiên bản đơn giản)",
+    "requirement": [
+      "Cửa hàng có 3 sản phẩm với giá cố định.",
+      "Khách hàng nhập số lượng từng sản phẩm muốn mua.",
+      "Chương trình tính tổng tiền và hiển thị hóa đơn."
+    ],
+    "input_format": "Ba số nguyên lần lượt là số lượng vở, từ điển và sách giáo khoa.",
+    "output_format": "Một số nguyên là tổng tiền khách hàng cần thanh toán (đơn vị: VND)."
+  },
+  "tests": [
+    { "input": [2, 3, 1], "expected": 110000 },
+    { "input": [5, 0, 2], "expected": 110000 }
+  ]
+}

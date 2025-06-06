@@ -1,0 +1,12 @@
+{
+  "function": "kiem_tra_nam_nhuan",
+  "description": "Kiểm tra năm nhuận theo quy tắc chia hết cho 400 hoặc chia hết cho 4 nhưng không chia hết cho 100.",
+  "tests": [
+    { "input": [2000], "expected": "nam 2000 la nam nhuan" },
+    { "input": [2020], "expected": "nam 2020 la nam nhuan" },
+    { "input": [1900], "expected": "nam 1900 la nam khong nhuan" },
+    { "input": [2023], "expected": "nam 2023 la nam khong nhuan" },
+    { "input": [2400], "expected": "nam 2400 la nam nhuan" },
+    { "input": [2100], "expected": "nam 2100 la nam khong nhuan" }
+  ]
+}
