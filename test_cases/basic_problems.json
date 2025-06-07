@@ -1,0 +1,124 @@
+{
+  "problems": [
+    {
+      "id": "01",
+      "title": "1. Tìm Hai Số Có Tổng Bằng Target",
+      "function": "def two_sum(nums: list[int], target: int) -> list[int]:",
+      "description": "Cho một danh sách các số nguyên <code>nums</code> và một số nguyên <code>target</code>.\nNhiệm vụ của bạn là tìm hai chỉ số <code>i</code> và <code>j</code> sao cho tổng của <code>nums[i]</code> và <code>nums[j]</code> bằng <code>target</code>.\n\nLưu ý:\n- Hai chỉ số <code>i</code> và <code>j</code> phải khác nhau.\n- Đảm bảo tồn tại duy nhất một cặp phần tử thỏa mãn.\n- Kết quả trả về là một danh sách chứa hai chỉ số <code>[i, j]</code>, thứ tự không quan trọng.",
+      "params": ["nums: list[int]", "target: int"],
+      "tests": [
+        { "input": [[2, 7, 11, 15], 9], "expected": [0, 1] },
+        { "input": [[3, 2, 4], 6], "expected": [1, 2] },
+        { "input": [[3, 3], 6], "expected": [0, 1] }
+      ]
+    },
+    {
+      "id": "02",
+      "title": "2. Tính Giai Thừa",
+      "function": "def factorial(n: int) -> int:",
+      "description": "Viết hàm tính giai thừa của số nguyên dương <code>n</code>.",
+      "params": ["n: int"],
+      "tests": [
+        { "input": [5], "expected": 120 },
+        { "input": [0], "expected": 1 },
+        { "input": [3], "expected": 6 }
+      ]
+    },
+    {
+      "id": "03",
+      "title": "3. Kiểm Tra Số Nguyên Tố",
+      "function": "def is_prime(n: int) -> bool:",
+      "description": "Viết hàm kiểm tra xem số nguyên <code>n</code> có phải là số nguyên tố hay không.",
+      "params": ["n: int"],
+      "tests": [
+        { "input": [2], "expected": true },
+        { "input": [4], "expected": false },
+        { "input": [17], "expected": true }
+      ]
+    },
+    {
+      "id": "04",
+      "title": "4. Đảo Ngược Chuỗi",
+      "function": "def reverse_string(s: str) -> str:",
+      "description": "Viết hàm đảo ngược chuỗi <code>s</code>.",
+      "params": ["s: str"],
+      "tests": [
+        { "input": ["hello"], "expected": "olleh" },
+        { "input": ["abc"], "expected": "cba" },
+        { "input": [""], "expected": "" }
+      ]
+    },
+    {
+      "id": "05",
+      "title": "5. Tính Tổng Các Số Trong Danh Sách",
+      "function": "def sum_list(nums: list[int]) -> int:",
+      "description": "Viết hàm tính tổng các phần tử trong danh sách số nguyên <code>nums</code>.",
+      "params": ["nums: list[int]"],
+      "tests": [
+        { "input": [[1, 2, 3, 4]], "expected": 10 },
+        { "input": [[-1, -2, -3]], "expected": -6 },
+        { "input": [[]], "expected": 0 }
+      ]
+    },
+    {
+      "id": "06",
+      "title": "6. Đếm Ký Tự Trong Chuỗi",
+      "function": "def count_char(s: str, c: str) -> int:",
+      "description": "Viết hàm đếm số lần ký tự <code>c</code> xuất hiện trong chuỗi <code>s</code>.",
+      "params": ["s: str", "c: str"],
+      "tests": [
+        { "input": ["banana", "a"], "expected": 3 },
+        { "input": ["hello", "l"], "expected": 2 },
+        { "input": ["abc", "d"], "expected": 0 }
+      ]
+    },
+    {
+      "id": "07",
+      "title": "7. Kiểm Tra Số Đối Xứng",
+      "function": "def is_palindrome(n: int) -> bool:",
+      "description": "Viết hàm kiểm tra xem số nguyên <code>n</code> có phải là số đối xứng (palindrome) hay không.",
+      "params": ["n: int"],
+      "tests": [
+        { "input": [121], "expected": true },
+        { "input": [123], "expected": false },
+        { "input": [1221], "expected": true }
+      ]
+    },
+    {
+      "id": "08",
+      "title": "8. Tìm Số Lớn Nhất",
+      "function": "def find_max(nums: list[int]) -> int:",
+      "description": "Viết hàm trả về số lớn nhất trong danh sách <code>nums</code>.",
+      "params": ["nums: list[int]"],
+      "tests": [
+        { "input": [[1, 2, 3, 4]], "expected": 4 },
+        { "input": [[-1, -5, -3]], "expected": -1 },
+        { "input": [[0]], "expected": 0 }
+      ]
+    },
+    {
+      "id": "09",
+      "title": "9. Kiểm Tra Năm Nhuận",
+      "function": "def is_leap_year(year: int) -> bool:",
+      "description": "Viết hàm kiểm tra xem <code>year</code> có phải là năm nhuận hay không.",
+      "params": ["year: int"],
+      "tests": [
+        { "input": [2020], "expected": true },
+        { "input": [1900], "expected": false },
+        { "input": [2000], "expected": true }
+      ]
+    },
+    {
+      "id": "10",
+      "title": "10. Tính Số Lẻ Trong Danh Sách",
+      "function": "def count_odds(nums: list[int]) -> int:",
+      "description": "Viết hàm đếm số lượng số lẻ trong danh sách <code>nums</code>.",
+      "params": ["nums: list[int]"],
+      "tests": [
+        { "input": [[1, 2, 3, 4, 5]], "expected": 3 },
+        { "input": [[2, 4, 6]], "expected": 0 },
+        { "input": [[1, 3, 5]], "expected": 3 }
+      ]
+    }
+  ]
+}
